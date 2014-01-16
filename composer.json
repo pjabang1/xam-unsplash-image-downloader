@@ -1,0 +1,32 @@
+{
+    "name": "pjabang1/xam-unsplash-image-downloader",
+    "description": "Downloads high resolution images from upsplash",
+    "keywords": ["Free High Resolution", "Unsplash", "Php", "Download"],
+    "homepage": "http://github.com/pjabang1/xam-html",
+    "type": "image-downloader",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pa Essa Jabang",
+            "email": "pjabang@gmail.com",
+            "homepage": "http://pjabang.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.1",
+        "guzzle/guzzle": "3.8.*@dev",
+        "symfony/console": "2.3.*@dev"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Xam\\Unsplash": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}
