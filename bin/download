@@ -18,42 +18,33 @@ $console
         ->setDescription('Downloads High Resolution Images By Upstream')
         ->setCode(function (InputInterface $input, OutputInterface $output) use($console) {
 
-                    
+                    $downloadDirectory = $input->getArgument('dir');
+                    $downloader = new \Xam\Unsplash\Downloader\ImageDownloader();
+                    $downloader->setClient(new Guzzle\Http\Client());
+
+                    $total = $downloader->setPath('http://unsplash.com/api/read')->getTotal();
                     $progress = $console->getHelperSet()->get('progress');
 
-                    $progress->start($output, 50);
-                    $i = 0;
-                    while ($i++ < 50) {
-                        sleep(2);
-                        // ... do some work
-                        // advance the progress bar 1 unit
-                        $progress->advance();
+                    $progress->start($output, $total);
+                    $start = 0;
+                    while ($start < $total) {
+
+                        $document = $downloader->getDocument($start);
+                        $images = $downloader->getImageUrls($document);
+                        foreach ($images AS $imageUrl) {
+
+                            $start++;
+                            try {
+                                $downloader->download($imageUrl, $downloadDirectory);
+                            } catch (\Exception $e) {
+                                $output->writeln('<error>Could not download ' . $imageUrl . '</error>');
+                            }
+                            $progress->advance();
+                        }
                     }
 
                     $progress->finish();
-
-                    $dir = $input->getArgument('dir');
-                    $fromUrl = 'http://bit.ly/1m7VgmS';
-                    $temp = $dir . '/' . uniqid();
-
-
-
-                    try {
-                        $client = new Guzzle\Http\Client();
-                        $response = $client->get($fromUrl)
-                                ->setResponseBody($temp)
-                                ->send();
-
-                        $toFile = $dir . '/' . basename($response->getEffectiveUrl());
-                        rename($temp, $toFile);
-
-                        return true;
-                    } catch (Exception $e) {
-                        // Log the error or something
-                        return false;
-                    }
-
-                    $output->writeln(sprintf('Dir listing for <info>%s</info>', $dir));
+                    return true;
                 });
 
 $console->run();
