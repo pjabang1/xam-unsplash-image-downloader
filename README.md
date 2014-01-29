@@ -13,6 +13,8 @@ http://www.lovetextures.com/
 http://speckyboy.com/2013/06/28/30-free-high-resolution-texture-packs/
 http://www.youthedesigner.com/2011/06/23/51-high-quality-free-texture-packs-to-download/
 
+http://www.photoshoproadmap.com/Photoshop-blog/60-impressive-free-high-resolution-textures-and-backgrounds/
+
 artdaily.com/index.asp?int_sec=2&int_new=61497#.Uuk4AhB_sxE
 
 
